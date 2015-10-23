@@ -3,12 +3,14 @@ package main
 import(
 	"bufio"
 	"github.com/mdaigle/GoDJ/control"
+	"github.com/mdaigle/GoDJ/request"
 	"fmt"
 	"os"
 	"strings"
 )
 
 func main() {
+	request.LoadConfig()
 	r := bufio.NewReader(os.Stdin)
 	fmt.Print("Welcome to GoDJ!\n")
 	for {
