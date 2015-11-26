@@ -25,3 +25,7 @@ func IncreaseVolume() {
 func DecreaseVolume() {
 	mack.Tell("Spotify", "set sound volume to sound volume - 5")
 }
+
+func PlayTrack(trackURI string) {
+	mack.Tell("Spotify", "play track " + trackURI);
+}
