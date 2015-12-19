@@ -9,6 +9,8 @@ var MIN_LOUDNESS 	= -100
 var MAX_FLOAT 		= 1.0
 var MIN_FLOAT 		= 0.0
 
+var INCREMENT_STEPS = 16
+
 type soundProfile struct {
 	style 													[]string
 	mood 													[]string
@@ -16,13 +18,13 @@ type soundProfile struct {
 	max_tempo, 					min_tempo 					int
 	max_duration, 				min_duration 				int
 	max_loudness, 				min_loudness 				int
-	artist_max_familiarity, 	artist_min_familiarity 		float32
-	song_max_hotttnesss, 		song_min_hotttnesss 		float32
-	max_danceability, 			min_danceability 			float32
-	max_energy, 				min_energy 					float32
-	max_liveness, 				min_liveness 				float32
-	max_speechiness, 			min_speechiness 			float32
-	sort string
+	artist_max_familiarity, 	artist_min_familiarity 		float64
+	song_max_hotttnesss, 		song_min_hotttnesss 		float64
+	max_danceability, 			min_danceability 			float64
+	max_energy, 				min_energy 					float64
+	max_liveness, 				min_liveness 				float64
+	max_speechiness, 			min_speechiness 			float64
+	sort 													string
 }
 
 func NewProfile() soundProfile {
@@ -48,6 +50,10 @@ func NewProfile() soundProfile {
 	};
 }
 
-func (field *int) setIntField(value int, ) {
+func incrementFloat(field float64) {
+	field = field + MAX_FLOAT/float64(INCREMENT_STEPS)
+}
 
+func incrementInt(field int, max, min int) {
+	field = field + (max - min)/INCREMENT_STEPS
 }
