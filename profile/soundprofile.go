@@ -11,42 +11,42 @@ var MIN_FLOAT 		= 0.0
 
 var INCREMENT_STEPS = 16
 
-type soundProfile struct {
-	style 													[]string
-	mood 													[]string
-	song_type 												string
-	max_tempo, 					min_tempo 					int
-	max_duration, 				min_duration 				int
-	max_loudness, 				min_loudness 				int
-	artist_max_familiarity, 	artist_min_familiarity 		float64
-	song_max_hotttnesss, 		song_min_hotttnesss 		float64
-	max_danceability, 			min_danceability 			float64
-	max_energy, 				min_energy 					float64
-	max_liveness, 				min_liveness 				float64
-	max_speechiness, 			min_speechiness 			float64
-	sort 													string
+type SoundProfile struct {
+	Style 													[]string
+	Mood 													[]string
+	Song_type 												string
+	Max_tempo, 					Min_tempo 					int
+	Max_duration, 				Min_duration 				int
+	Max_loudness, 				Min_loudness 				int
+	Artist_max_familiarity, 	Artist_min_familiarity 		float64
+	Song_max_hotttnesss, 		Song_min_hotttnesss 		float64
+	Max_danceability, 			Min_danceability 			float64
+	Max_energy, 				Min_energy 					float64
+	Max_liveness, 				Min_liveness 				float64
+	Max_speechiness, 			Min_speechiness 			float64
+	Sort 													string
 }
 
-func NewProfile() soundProfile {
-	return soundProfile{
-		max_tempo:				MAX_TEMPO,
-		min_tempo:				MIN_TEMPO,
-		max_duration:			MAX_DURATION,
-		min_duration:			MIN_DURATION,
-		max_loudness:			MAX_LOUDNESS,
-		min_loudness:			MIN_LOUDNESS,
-		artist_max_familiarity:	MAX_FLOAT,
-		artist_min_familiarity:	MIN_FLOAT,
-		song_max_hotttnesss:	MAX_FLOAT,
-		song_min_hotttnesss:	MIN_FLOAT,
-		max_danceability:		MAX_FLOAT,
-		min_danceability:		MIN_FLOAT,
-		max_energy:				MAX_FLOAT,
-		min_energy:				MIN_FLOAT,
-		max_liveness:			MAX_FLOAT,
-		min_liveness:			MIN_FLOAT,
-		max_speechiness:		MAX_FLOAT,
-		min_speechiness:		MIN_FLOAT,
+func NewProfile() SoundProfile {
+	return SoundProfile{
+		Max_tempo:				MAX_TEMPO,
+		Min_tempo:				MIN_TEMPO,
+		Max_duration:			MAX_DURATION,
+		Min_duration:			MIN_DURATION,
+		Max_loudness:			MAX_LOUDNESS,
+		Min_loudness:			MIN_LOUDNESS,
+		Artist_max_familiarity:	MAX_FLOAT,
+		Artist_min_familiarity:	MIN_FLOAT,
+		Song_max_hotttnesss:	MAX_FLOAT,
+		Song_min_hotttnesss:	MIN_FLOAT,
+		Max_danceability:		MAX_FLOAT,
+		Min_danceability:		MIN_FLOAT,
+		Max_energy:				MAX_FLOAT,
+		Min_energy:				MIN_FLOAT,
+		Max_liveness:			MAX_FLOAT,
+		Min_liveness:			MIN_FLOAT,
+		Max_speechiness:		MAX_FLOAT,
+		Min_speechiness:		MIN_FLOAT,
 	};
 }
 
