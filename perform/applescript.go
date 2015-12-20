@@ -27,5 +27,5 @@ func DecreaseVolume() {
 }
 
 func PlayTrack(trackURI string) {
-	mack.Tell("Spotify", "play track " + trackURI);
+	mack.Tell("Spotify", "play track \"" + trackURI + "\"");
 }
