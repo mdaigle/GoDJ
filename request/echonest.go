@@ -12,6 +12,7 @@ import (
 	"github.com/fatih/structs"
 //	"reflect"
 	"strings"
+	"encoding/json"
 )
 
 const (
@@ -24,14 +25,15 @@ type EchoNestClient struct {
 	ApiKey string
 }
 
-func GetSongIdsByProfile(soundProfile profile.SoundProfile)(string, error) {
+func GetSongIdsByProfile(soundProfile profile.SoundProfile)([]string, error) {
 	params := url.Values{}
 	params.Add("api_key", echoNestClient.ApiKey)
-	params.Add("bucket", "id:spotify-WW")
+	params.Add("bucket", "id:spotify")
+	params.Add("bucket", "tracks")
 	params.Add("format", "json")
 
-	m := structs.Map(soundProfile)
-	for key, value := range m {
+	profile := structs.Map(soundProfile)
+	for key, value := range profile {
 		if len(fmt.Sprint(value)) != 0 && fmt.Sprint(value) != "[]" {
 			fmt.Println("Adding " + strings.ToLower(key) + " with value " + fmt.Sprint(value))
 			params.Add(strings.ToLower(key), fmt.Sprint(value))
@@ -42,17 +44,33 @@ func GetSongIdsByProfile(soundProfile profile.SoundProfile)(string, error) {
 
 	response, err := http.Get(endpoint)
 	if err != nil {
-		return "", err
+		return []string{}, err
 	}
 
 
 	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		return "", err
+		return []string{}, err
 	}
 
-	//var songResponse []string
-	//json.Unmarshal(body, &songResponse)
 
-	return string(body), nil
+	var spotifyURIs []string
+
+
+	var rawResponse interface{}
+	json.Unmarshal(body, &rawResponse)
+	m := rawResponse.(map[string]interface{})
+	responseBody := m["response"].(map[string]interface{})
+	songsArray := responseBody["songs"].([]interface{})
+	for songIndex := range(songsArray) {
+		songsArrayItem := songsArray[songIndex].(map[string]interface{})
+		tracks := songsArrayItem["tracks"].([]interface{})
+		for trackIndex := range(tracks) {
+			trackArrayItem := tracks[trackIndex].(map[string]interface{})
+			id := trackArrayItem["foreign_id"].(string)
+			spotifyURIs = append(spotifyURIs, id)
+		}
+	}
+
+	return spotifyURIs, nil
 }
