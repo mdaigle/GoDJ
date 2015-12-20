@@ -11,6 +11,7 @@ func LoadConfig() {
 	type Configuration struct {
 		SpotifyId     string
 		SpotifySecret string
+		EchonestKey	  string
 	}
 
 
@@ -25,5 +26,6 @@ func LoadConfig() {
 		fmt.Println("error:", err)
 	}
 
-	spotify = spotify.New(configuration.SpotifyId, configuration.SpotifySecret)
+	spotifyClient = spotify.New(configuration.SpotifyId, configuration.SpotifySecret)
+	echoNestClient = EchoNestClient{ApiKey:configuration.EchonestKey}
 }
